@@ -1,1 +1,40 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>Absher Demo</title><link rel="stylesheet" href="styles.css"></head><body><h1>Absher Demo</h1><script src="script.js"></script></body></html>
+<!DOCTYPE html><htm<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>AI Fraud Prevention Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="profiles.js"></script>
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="Absher.svg.png" class="logo" />
+        <img src="logo-h.png" class="logo" />
+    </header>
+
+    <section class="container">
+        <h1>لوحة المستخدمين</h1>
+        <div id="profile-buttons"></div>
+    </section>
+
+    <!-- Call window -->
+    <div id="call-window" class="modal hidden">
+        <div class="modal-content">
+            <h2>مكالمة تحقق</h2>
+            <div id="call-status">جاري الاتصال...</div>
+            <button class="close-btn" onclick="endCall()">إنهاء المكالمة</button>
+        </div>
+    </div>
+
+    <!-- OTP window -->
+    <div id="otp-window" class="modal hidden">
+        <div class="modal-content">
+            <h2>رمز التحقق</h2>
+            <div id="otp-value"></div>
+            <button class="close-btn" onclick="closeOTP()">إغلاق</button>
+        </div>
+    </div>
+</body>
+</html>
