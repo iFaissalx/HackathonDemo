@@ -1,3 +1,17 @@
+exports.handler = async (event, context) => {
+    const apiKey = process.env.OPENAI_API_KEY;
+
+    if (!apiKey) {
+        return {
+            statusCode: 500,
+            body: "Missing OPENAI_API_KEY"
+        };
+    }
+
+   
+
+
+
 // netlify/functions/realtime.js
 import { OpenAI } from "openai";
 
@@ -23,4 +37,6 @@ export const handler = async (event, context) => {
       body: JSON.stringify({ error: err.message }),
     };
   }
+};
+
 };
