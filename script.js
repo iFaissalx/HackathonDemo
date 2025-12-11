@@ -51,8 +51,8 @@ async function startCall(profile) {
     document.getElementById("call-window").classList.remove("hidden");
     document.getElementById("call-status").innerText = "جاري الاتصال...";
 
-    const url = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview";
-    const apiKey = "YOUR_OPENAI_API_KEY";
+    const url = "/api/realtime";
+    
 
     realtimeSocket = new WebSocket(url, {
         headers: { "Authorization": `Bearer ${apiKey}` }
