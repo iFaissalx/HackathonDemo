@@ -1,43 +1,26 @@
-import { WebSocket } from "ws";
+// netlify/functions/realtime.js
+import { OpenAI } from "openai";
 
-export default async function handler(req, res) {
-    res.setHeader("Content-Type", "application/json");
-    res.setHeader("Cache-Control", "no-cache");
-
-    const apiKey = process.env.OPENAI_API_KEY;
-
-    if (!apiKey) {
-        return res.status(500).json({ error: "Missing OPENAI_API_KEY" });
-    }
-
-    const model = "gpt-4o-realtime-preview";
-
-    const ws = new WebSocket(
-        `wss://api.openai.com/v1/realtime?model=${model}`,
-        {
-            headers: {
-                "Authorization": `Bearer ${apiKey}`,
-                "OpenAI-Beta": "realtime=v1"
-            }
-        }
-    );
-
-    ws.on("open", () => {
-        console.log("Realtime connection established");
+export const handler = async (event, context) => {
+  try {
+    const client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
     });
 
-    ws.on("message", (data) => {
-        res.write(data);
+    const response = await client.responses.create({
+      model: "gpt-4o-realtime-preview-2024-12-17",
+      input: "hello",
     });
 
-    ws.on("close", () => {
-        res.end();
-    });
-
-    ws.on("error", (err) => {
-        console.error("Realtime error", err);
-        res.status(500).send("WebSocket error");
-    });
-
-    req.on("close", () => ws.close());
-}
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(response),
+    };
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: err.message }),
+    };
+  }
+};
