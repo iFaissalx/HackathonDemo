@@ -51,7 +51,7 @@ async function startCall(profile) {
     document.getElementById("call-window").classList.remove("hidden");
     document.getElementById("call-status").innerText = "جاري الاتصال...";
 
-    const url = "/api/realtime";
+    const url = "/netlify/functions/realtime";
     
 
     realtimeSocket = new WebSocket(url, {
